@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>bc的Pytorch Cheatsheet | 你找到了我的一个魂器</title><meta name="keywords" content="coding"><meta name="author" content="Bicheng Lin"><meta name="copyright" content="Bicheng Lin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="上手新项目、语法、辅助工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bc的Pytorch Cheatsheet">
+<meta property="og:url" content="http://linbc-73.github.io/2023/04/26/learn-ai-pytorch-cheatsheet/index.html">
+<meta property="og:site_name" content="你找到了我的一个魂器">
+<meta property="og:description" content="上手新项目、语法、辅助工具">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/linbc-73/blog_img/drawings/arbitrary_color.jpg">
+<meta property="article:published_time" content="2023-04-26T01:40:25.000Z">
+<meta property="article:modified_time" content="2023-05-19T03:08:10.524Z">
+<meta property="article:author" content="Bicheng Lin">
+<meta property="article:tag" content="coding">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/linbc-73/blog_img/drawings/arbitrary_color.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://linbc-73.github.io/2023/04/26/learn-ai-pytorch-cheatsheet/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":true,"highlightHeightLimit":50},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'bc的Pytorch Cheatsheet',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-19 11:08:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://user-images.githubusercontent.com/83945633/190863049-7f4c83e2-c0b9-4b5f-8939-8b8af3333d34.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> Links</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/linbc-73/blog_img/drawings/arbitrary_color.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">你找到了我的一个魂器</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> Links</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Links</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">bc的Pytorch Cheatsheet</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-26T01:40:25.000Z" title="发表于 2023-04-26 09:40:25">2023-04-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-19T03:08:10.524Z" title="更新于 2023-05-19 11:08:10">2023-05-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="bc的Pytorch Cheatsheet"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一、创建一个新项目"><a href="#一、创建一个新项目" class="headerlink" title="一、创建一个新项目"></a>一、创建一个新项目</h1><h2 id="data-amp-dataset-amp-dataloader"><a href="#data-amp-dataset-amp-dataloader" class="headerlink" title="data &amp; dataset &amp; dataloader"></a>data &amp; dataset &amp; dataloader</h2><p>第一步，下载数据集。可能是 .txt 或者 .csv 格式文件，查看数据集中的变量名和格式。<br>第二步，创建 torch.utils.data.Dataset 类型对象。一共有三个必须实现的成员函数，分别是 _<em>init</em><em>(),  _<em>getitem</em></em>(), _<em>len</em>_()。  </p>
+<ul>
+<li>_<em>init</em>_(self, *args)：初始化，将数据 load 到内存里，可能还需要进行一些处理。</li>
+<li>_<em>getitem</em>_(self, idx)：idx 是一个 int 值，表示需要索引的位置，该函数应该返回一个 data sample，例如，将分子的 Chem.rdchem.Mol 转为 torch_geometric.data.Data 类型对象，会被Dataloader调用。<br>第三步，创建 torch.utils.data.Dataloader 类型对象。一般选择传入的成员变量是：  </li>
+<li>dataset: compulsory, Dataset.</li>
+<li>batch_size: optional, int. default &#x3D; 1.</li>
+<li>shuffle: optional, int. default &#x3D; False.</li>
+<li>num_workers: optional, int. default &#x3D; 0. 含义是加载数据过程中子进程的数量，默认数据加载到主进程当中。</li>
+<li>collate_fn: Callable, optional. 合并一个 mini-batch 的成员函数。<br>重点关注 collate_fn 的实现：Dataset 的 _<em>getitem</em>_ 返回的不同 sample 的数据可能不是等长的，需要在该函数中进行截断和填补。</li>
+</ul>
+<h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><p>创建一个 model 的对象，可能需要 load 原始参数。  </p>
+<h2 id="train-x2F-eval"><a href="#train-x2F-eval" class="headerlink" title="train&#x2F;eval"></a>train&#x2F;eval</h2><p>第一步，设置模型的状态，例如，model.train() 或者 model.eval()。<br>第二步，enumerate(dataloader) 获得 batch 数据。<br>第三步，训练前的准备工作。dataloader 中的数据一般存在于 CPU 上，需要通过 .to(device) 将数据转移到 GPU 上。以及，在 train 函数里，每次梯度回传前，需要将 optimizer 的梯度清空，即 optimizer.zero_grad()。<br>第四步，计算 loss 和其他评价的指标，比如 accuracy 等。<br>第五步，在训练的时候，梯度回传，train_loss.backward() + optimizer.step()。</p>
+<h2 id="上手一个项目"><a href="#上手一个项目" class="headerlink" title="上手一个项目"></a>上手一个项目</h2><p>项目重点看几个部分，首先要把握项目的主脉络<br>第一，项目依赖，data、model、configuration等；<br>第二，项目如何启动，bash文件；<br>第三，项目的入口文件；<br>第四，项目的状态管理文件，logs等。  </p>
+<p>其次是读懂代码的Trick：<br>项目代码中一般不会解释一个变量的内容是什么，可以打印tensor.size()辅助理解。  </p>
+<h1 id="二、Pytorch语法-Cheatsheet-TODO"><a href="#二、Pytorch语法-Cheatsheet-TODO" class="headerlink" title="二、Pytorch语法 Cheatsheet (TODO)"></a>二、Pytorch语法 Cheatsheet (TODO)</h1><h2 id="tensor相关处理"><a href="#tensor相关处理" class="headerlink" title="tensor相关处理"></a>tensor相关处理</h2><h2 id="避免内存泄漏的心得"><a href="#避免内存泄漏的心得" class="headerlink" title="避免内存泄漏的心得"></a>避免内存泄漏的心得</h2><h1 id="三、辅助工具"><a href="#三、辅助工具" class="headerlink" title="三、辅助工具"></a>三、辅助工具</h1><h2 id="wandb"><a href="#wandb" class="headerlink" title="wandb"></a>wandb</h2><p>登录与创建项目  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> wandb</span><br><span class="line">wandb.login(key=<span class="string">&quot;wandb_api_key&quot;</span>)</span><br><span class="line">wandb.init(project=<span class="string">&quot;project_id&quot;</span>, name=<span class="string">&quot;process_name&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>打印中间信息<br>可以打印的内容有 A dict of serializable python objects i.e str, ints, floats, Tensors, dicts, or any of the wandb.data_types.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wandb.log(data=&#123;<span class="string">&quot;dict_key&quot;</span>:<span class="string">&quot;dict_value&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="tracemalloc"><a href="#tracemalloc" class="headerlink" title="tracemalloc"></a>tracemalloc</h2><p>五一节别人都在旅游快乐打卡，而我却与CPU内存泄漏恶战了三天。<br>使用tracemalloc可以查看发生内存泄漏的位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tracemalloc</span><br><span class="line">tracemalloc.start()</span><br><span class="line"></span><br><span class="line">snapshot = tracemalloc.take_snapshot()</span><br><span class="line">top_stats = snapshot.statistics(<span class="string">&#x27;lineno&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;[ Top 10 differences ]&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> stat <span class="keyword">in</span> top_stats[:<span class="number">10</span>]:</span><br><span class="line">    <span class="built_in">print</span>(stat)</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://linbc-73.github.io">Bicheng Lin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://linbc-73.github.io/2023/04/26/learn-ai-pytorch-cheatsheet/">http://linbc-73.github.io/2023/04/26/learn-ai-pytorch-cheatsheet/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://linbc-73.github.io" target="_blank">你找到了我的一个魂器</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/coding/">coding</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/linbc-73/blog_img/drawings/arbitrary_color.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/04/22/learn-ai-with-limu-paperreading2/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/linbc-73/blog_img/photos/study.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">跟学笔记：bilibili跟李沐学AI【论文精读】系列学习笔记2————GNN神经网络</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://user-images.githubusercontent.com/83945633/190863049-7f4c83e2-c0b9-4b5f-8939-8b8af3333d34.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Bicheng Lin</div><div class="author-info__description">Bicheng Lin的博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/linbc-73"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到bc的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text">一、创建一个新项目</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#data-amp-dataset-amp-dataloader"><span class="toc-number">1.1.</span> <span class="toc-text">data &amp; dataset &amp; dataloader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#model"><span class="toc-number">1.2.</span> <span class="toc-text">model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#train-x2F-eval"><span class="toc-number">1.3.</span> <span class="toc-text">train&#x2F;eval</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E6%89%8B%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.4.</span> <span class="toc-text">上手一个项目</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Pytorch%E8%AF%AD%E6%B3%95-Cheatsheet-TODO"><span class="toc-number">2.</span> <span class="toc-text">二、Pytorch语法 Cheatsheet (TODO)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#tensor%E7%9B%B8%E5%85%B3%E5%A4%84%E7%90%86"><span class="toc-number">2.1.</span> <span class="toc-text">tensor相关处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E5%BF%83%E5%BE%97"><span class="toc-number">2.2.</span> <span class="toc-text">避免内存泄漏的心得</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7"><span class="toc-number">3.</span> <span class="toc-text">三、辅助工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#wandb"><span class="toc-number">3.1.</span> <span class="toc-text">wandb</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tracemalloc"><span class="toc-number">3.2.</span> <span class="toc-text">tracemalloc</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/04/26/learn-ai-pytorch-cheatsheet/" title="bc的Pytorch Cheatsheet"><img src="https://cdn.jsdelivr.net/gh/linbc-73/blog_img/drawings/arbitrary_color.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="bc的Pytorch Cheatsheet"/></a><div class="content"><a class="title" href="/2023/04/26/learn-ai-pytorch-cheatsheet/" title="bc的Pytorch Cheatsheet">bc的Pytorch Cheatsheet</a><time datetime="2023-04-26T01:40:25.000Z" title="发表于 2023-04-26 09:40:25">2023-04-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/22/learn-ai-with-limu-paperreading2/" title="跟学笔记：bilibili跟李沐学AI【论文精读】系列学习笔记2————GNN神经网络"><img src="https://cdn.jsdelivr.net/gh/linbc-73/blog_img/photos/study.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="跟学笔记：bilibili跟李沐学AI【论文精读】系列学习笔记2————GNN神经网络"/></a><div class="content"><a class="title" href="/2023/04/22/learn-ai-with-limu-paperreading2/" title="跟学笔记：bilibili跟李沐学AI【论文精读】系列学习笔记2————GNN神经网络">跟学笔记：bilibili跟李沐学AI【论文精读】系列学习笔记2————GNN神经网络</a><time datetime="2023-04-22T15:15:06.000Z" title="发表于 2023-04-22 23:15:06">2023-04-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/14/learn-ai-lab-workflow/" title="How to Set Up An Environment For A Neural Network Project"><img src="https://cdn.jsdelivr.net/gh/linbc-73/blog_img/photos/workflow-pipeline.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="How to Set Up An Environment For A Neural Network Project"/></a><div class="content"><a class="title" href="/2023/04/14/learn-ai-lab-workflow/" title="How to Set Up An Environment For A Neural Network Project">How to Set Up An Environment For A Neural Network Project</a><time datetime="2023-04-14T00:26:00.000Z" title="发表于 2023-04-14 08:26:00">2023-04-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/11/learn-ai-with-limu-paperreading1/" title="跟学笔记：bilibili跟李沐学AI【论文精读】系列学习笔记1————读论文的方法论"><img src="https://cdn.jsdelivr.net/gh/linbc-73/blog_img/photos/study.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="跟学笔记：bilibili跟李沐学AI【论文精读】系列学习笔记1————读论文的方法论"/></a><div class="content"><a class="title" href="/2023/04/11/learn-ai-with-limu-paperreading1/" title="跟学笔记：bilibili跟李沐学AI【论文精读】系列学习笔记1————读论文的方法论">跟学笔记：bilibili跟李沐学AI【论文精读】系列学习笔记1————读论文的方法论</a><time datetime="2023-04-11T11:38:20.000Z" title="发表于 2023-04-11 19:38:20">2023-04-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/17/2022-Google-GCN-STEP-Internship-Review/" title="2022 Google GCN STEP Internship Review"><img src="https://cdn.jsdelivr.net/gh/linbc-73/blog_img/photos/hardAndroid.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2022 Google GCN STEP Internship Review"/></a><div class="content"><a class="title" href="/2022/09/17/2022-Google-GCN-STEP-Internship-Review/" title="2022 Google GCN STEP Internship Review">2022 Google GCN STEP Internship Review</a><time datetime="2022-09-17T07:10:33.000Z" title="发表于 2022-09-17 15:10:33">2022-09-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Bicheng Lin</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">很高兴认识你</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/npm/live2d-widget@^3.1.3/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"superSample":2,"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-90},"mobile":{"show":true,"scale":1},"react":{"opacityDefault":0.3,"opacityOnHover":0.3,"opacity":0.95},"log":false});</script></body></html>
